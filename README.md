@@ -111,7 +111,7 @@ endpoint:
       ```
 
 * wid: workspace ID (integer, **required** if pid or tid not supplied).
-    * See [Finding your workspace IDs] for
+    * See [Finding your workspace IDs](#finding-your-workspace-ids) for
       how to get the ID using this grunt task.
 * pid: project ID (integer, not required)
 * tid: task ID (integer, not required)
@@ -145,7 +145,8 @@ grunt toggl:MYTASK:getWorkspaces
 To get a JSON list of workspaces. `MYTASK` should be whatever task you have
 configured, since you still need a valid API Key to get the workspaces.
 
-*OR* just run the task without a `wid` set.
+*OR* just run the task without a workspace set. It will list your workspaces
+by default.
 
 #### Default Options
 
