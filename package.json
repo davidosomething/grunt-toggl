@@ -1,7 +1,7 @@
 {
   "name": "grunt-toggl",
   "description": "Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/davidosomething/grunt-toggl",
   "author": {
     "name": "David O'Trakoun",
@@ -45,6 +45,7 @@
     "tracking"
   ],
   "dependencies": {
+    "lodash": "^2.4.1",
     "request": "^2.34.0"
   }
 }

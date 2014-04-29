@@ -58,6 +58,15 @@ module.exports = function(grunt) {
         },
       },
 
+      localSettingsFile: {
+        options: {
+          settingsFile: ".toggl", // this is .gitignored
+          data: {
+            description: 'TEST ENTRY'
+          }
+        },
+      },
+
       ////////////////////////////////////////
       // Invalid
       noKey: {
@@ -101,6 +110,7 @@ module.exports = function(grunt) {
   grunt.loadTasks('tasks');
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
