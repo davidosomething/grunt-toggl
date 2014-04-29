@@ -90,7 +90,7 @@ Default value: `{}`
 The `data` object can take any values from the toggl `time_entries` API
 endpoint:
 
- * description: (string, strongly suggested to be used)
+* description: (string, strongly suggested to be used)
     * I like to use the `package.json` name in the description, assuming you
       have it loaded into the pkg variable
       (`pkg: grunt.file.readJSON('package.json')`):
@@ -101,26 +101,26 @@ endpoint:
       }
       ```
 
- * wid: workspace ID (integer, **required** if pid or tid not supplied).
+* wid: workspace ID (integer, **required** if pid or tid not supplied).
     * See [Retrieving a user's workspaces](#retrieving-a-users-workspaces) for
       how to get the ID using this grunt task.
- * pid: project ID (integer, not required)
- * tid: task ID (integer, not required)
- * billable: (boolean, not required, default false, available for pro
-   workspaces)
- * start: time entry start time (string, **required**, ISO 8601 date and time)
- * stop: time entry stop time (string, not required, ISO 8601 date and time)
- * duration: time entry duration in seconds. If the time entry is currently
-   running, the duration attribute contains a negative value, denoting the
-   start of the time entry in seconds since epoch (Jan 1 1970). The correct
-   duration can be calculated as current_time + duration, where current_time is
-   the current time in seconds since epoch. (integer, **required**)
- * created_with: the name of your client app (string, **required**)
- * tags: a list of tag names (array of strings, not required)
- * duronly: should Toggl show the start and stop time of this time entry?
-   (boolean, not required)
- * at: timestamp that is sent in the response, indicates the time item was last
-   updated
+* pid: project ID (integer, not required)
+* tid: task ID (integer, not required)
+* billable: (boolean, not required, default false, available for pro
+  workspaces)
+* start: time entry start time (string, **required**, ISO 8601 date and time)
+* stop: time entry stop time (string, not required, ISO 8601 date and time)
+* duration: time entry duration in seconds. If the time entry is currently
+  running, the duration attribute contains a negative value, denoting the
+  start of the time entry in seconds since epoch (Jan 1 1970). The correct
+  duration can be calculated as current_time + duration, where current_time is
+  the current time in seconds since epoch. (integer, **required**)
+* created_with: the name of your client app (string, **required**)
+* tags: a list of tag names (array of strings, not required)
+* duronly: should Toggl show the start and stop time of this time entry?
+  (boolean, not required)
+* at: timestamp that is sent in the response, indicates the time item was last
+  updated
 
 See this doc for the latest properties available for the API:
 [https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md](https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md)
