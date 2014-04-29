@@ -44,9 +44,7 @@ grunt.initConfig({
       apiKeyFile: 'toggl.json'
       workspace: null,
       data: {
-        time_entry: {
-          description: '<%= pkg.name %>',
-        }
+        description: '<%= pkg.name %>',
       }
     }
   },
@@ -82,7 +80,7 @@ want your API key in it (e.g. add your `.toggl` file to your `.gitignore`).
 Type: `Integer`
 Default value: `null`
 
-Equivalent to `options.data.time_entry.wid`. Specify the Toggl Workspace ID
+Equivalent to `options.data.wid`. Specify the Toggl Workspace ID
 that newly created time entries should go into.
 
 #### options.data
@@ -93,7 +91,17 @@ The `data` object can take any values from the toggl `time_entries` API
 endpoint:
 
  * description: (string, strongly suggested to be used)
+    * I like to use the `package.json` name in the description, assuming you
+      have it loaded into the pkg variable
+      (`pkg: grunt.file.readJSON('package.json')`):
+      ```
+      data: {
+        description: '<%= pkg.name %>',
+      }
+      ```
  * wid: workspace ID (integer, **required** if pid or tid not supplied).
+    * See [Retrieving a user's workspaces] for how to get the ID using this
+      grunt task.
  * pid: project ID (integer, not required)
  * tid: task ID (integer, not required)
  * billable: (boolean, not required, default false, available for pro
@@ -145,6 +153,10 @@ grunt.initConfig({
 In lieu of a formal styleguide, take care to maintain the existing coding
 style. Add unit tests for any new or changed functionality. Lint and test your
 code using [Grunt](http://gruntjs.com/).
+
+## TODO
+
+ * Project and Task ID task querying like I provided for workspaces.
 
 ## Release History
 
