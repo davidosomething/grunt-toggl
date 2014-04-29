@@ -94,14 +94,16 @@ endpoint:
     * I like to use the `package.json` name in the description, assuming you
       have it loaded into the pkg variable
       (`pkg: grunt.file.readJSON('package.json')`):
+
       ```
       data: {
         description: '<%= pkg.name %>',
       }
       ```
+
  * wid: workspace ID (integer, **required** if pid or tid not supplied).
-    * See [Retrieving a user's workspaces] for how to get the ID using this
-      grunt task.
+    * See [Retrieving a user's workspaces](#retrieving-a-users-workspaces) for
+      how to get the ID using this grunt task.
  * pid: project ID (integer, not required)
  * tid: task ID (integer, not required)
  * billable: (boolean, not required, default false, available for pro
