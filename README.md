@@ -8,6 +8,8 @@
 > Toggl API for Grunt. E.g. start time tracking with `grunt watch` or
   `grunt toggl`
 
+![Demo](http://i0.wp.com/davidosomething.com/content/uploads/grunt-toggl.gif)
+
 ## Getting Started
 This plugin requires Grunt `~0.4.4`
 
