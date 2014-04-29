@@ -41,7 +41,7 @@ grunt.initConfig({
   toggl: {
     options: {
       apiKey: '',
-      apiKeyFile: 'toggl.json'
+      settingsFile: 'toggl.json'
       workspace: null,
       data: {
         description: '<%= pkg.name %>',
@@ -154,7 +154,7 @@ by default.
 grunt.initConfig({
   toggl: {
     options: {
-      apiKeyFile: '.toggl',
+      settingsFile: '.toggl',
       workspace: null,
     }
   },
