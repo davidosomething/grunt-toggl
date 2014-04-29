@@ -62,14 +62,23 @@ Toggl.com [https://www.toggl.com/app/#profile](https://www.toggl.com/app/#profil
 Type: `String`
 Default value: ``
 
-This is one way to specify your Toggl.com API key.
+This is one way to specify your Toggl API key.
 
-#### options.apiKeyFile
+#### options.settingsFile
 Type: `String`
 Default value: `.toggl`
 
 This is another way to specify your Toggl API Key. Enter a filename to a
-textfile that contains nothing but your API key in it.
+JSON file that contains the key "apiKey" and value with your Toggl API key.
+
+```
+{
+  "apiKey":     "demokeydemokeydemokey",
+  "workspace":  12345
+}
+```
+
+You can also specify the workspace here.
 
 This format is useful if you keep your Gruntfile in version control and don't
 want your API key in it (e.g. add your `.toggl` file to your `.gitignore`).
