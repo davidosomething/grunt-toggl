@@ -111,7 +111,7 @@ endpoint:
       ```
 
 * wid: workspace ID (integer, **required** if pid or tid not supplied).
-    * See [Retrieving a user's workspaces](#retrieving-a-users-workspaces) for
+    * See [Finding your workspace IDs] for
       how to get the ID using this grunt task.
 * pid: project ID (integer, not required)
 * tid: task ID (integer, not required)
@@ -136,7 +136,7 @@ See this doc for the latest properties available for the API:
 
 ### Usage Examples
 
-#### Retrieving a user's workspaces
+#### Finding your workspace IDs
 
 Use:
 ```
