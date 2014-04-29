@@ -27,6 +27,7 @@ exports.toggl = {
     // setup here if necessary
     done();
   },
+  /*
   default_options: function(test) {
     test.expect(1);
 
@@ -45,4 +46,5 @@ exports.toggl = {
 
     test.done();
   },
+  */
 };

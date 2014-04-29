@@ -1,3 +1,8 @@
+[![Build Status: Linux](https://travis-ci.org/davidosomething/grunt-toggl.png?branch=master)](https://travis-ci.org/davidosomething/grunt-toggl)
+[![dependencies](https://david-dm.org/davidosomething/grunt-toggl.png)](https://david-dm.org/davidosomething/grunt-toggl)
+[![NPM version](https://badge.fury.io/js/grunt-toggl.svg)](http://badge.fury.io/js/grunt-toggl)
+<br>[![npm Badge](https://nodei.co/npm/grunt-toggl.png?compact=true)](http://npmjs.org/package/grunt-toggl)
+
 # grunt-toggl
 
 > Toggl API for Grunt. E.g. start time tracking with `grunt watch` or

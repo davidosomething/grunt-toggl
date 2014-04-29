@@ -68,6 +68,7 @@ module.exports = function(grunt) {
         grunt.fail.warn(err, response.statusCode);
       }
 
+      grunt.log.writeln('New Toggl timer (maybe) started!');
       done();
     }
 
