@@ -146,4 +146,5 @@ code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 
+ * 2014-04-28   v0.1.1    Alpha READY. It works.
  * 2014-04-28   v0.1.0    Work in progress, not ready.
