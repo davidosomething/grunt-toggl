@@ -1,0 +1,50 @@
+{
+  "name": "grunt-toggl",
+  "description": "Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`",
+  "version": "0.1.0",
+  "homepage": "https://github.com/davidosomething/grunt-toggl",
+  "author": {
+    "name": "David O'Trakoun",
+    "email": "me@davidosomething.com",
+    "url": "http://davidosomething.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/davidosomething/grunt-toggl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/davidosomething/grunt-toggl/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/davidosomething/grunt-toggl/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-bump": "0.0.13",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-nodeunit": "^0.3.3"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.4"
+  },
+  "keywords": [
+    "gruntplugin",
+    "grunt",
+    "toggl",
+    "time",
+    "tracking"
+  ],
+  "dependencies": {
+    "request": "^2.34.0"
+  }
+}
