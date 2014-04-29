@@ -8,16 +8,15 @@
 
 'use strict';
 
+var _       = require('lodash');
+var print   = require('node-print');
 var request = require('request');
-var _ = require('lodash');
 
 module.exports = function(grunt) {
 
-
-  grunt.registerMultiTask(
-    'toggl',
+  grunt.registerMultiTask('toggl',
     'Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`',
-    function (getWorkspaces) {
+    function (listMode) {
 
     // Request is asynchronous
     var done = this.async();
@@ -25,35 +24,156 @@ module.exports = function(grunt) {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       settingsFile: '.toggl',
-      workspace:    null,
       data:         {}
     });
 
-    var err = null;
-    var apiKey = null;
-    var workspace = null;
+    // request form data
+    var settings = {
+      apiKey:     null,
+      workspace:  null,
+      project:    null
+    };
+
+    // request params
     var params = {};
 
+    // thing to do
+    var runMode = '';
+
+    // temp error object storage
+    var err = null;
+
+////////////////////////////////////////////////////////////////////////////////
+// CALLBACKS
 ////////////////////////////////////////////////////////////////////////////////
 
     /**
-     * validateKey
-     */
-    function validateKey() {
-      if (typeof apiKey !== 'string' || !apiKey.length) {
-        err = new Error('grunt-toggl needs an api key to work.');
-        grunt.fail.warn(err);
-      }
-    }
-
-    /**
      * asynchronousCall requestCallback
-     * @param object error
-     * @param object response
-     * @param object body
+     *
+     * @TODO use a _.filter for keys or something more efficient than `delete`
+     * @param string runMode
+     * @param string|object body
      * @return void
      */
-    function requestCallback(error, response, body) {
+    function requestCallback(runMode, body) {
+      if (runMode === 'listWorkspaces') {
+        _.forEach(body, function (workspace, index) {
+          delete workspace.admin;
+          delete workspace.at;
+          delete workspace.default_currency;
+          delete workspace.default_hourly_rate;
+          delete workspace.logo_url;
+          delete workspace.only_admins_may_create_projects;
+          delete workspace.only_admins_see_billable_rates;
+          delete workspace.only_admins_see_team_dashboard;
+          delete workspace.projects_billable_by_default;
+          delete workspace.rounding;
+          delete workspace.rounding_minutes;
+        });
+
+        grunt.log.subhead('Listing your workspaces');
+        print.pt(body);
+      }
+
+      else if (runMode === 'listProjects') {
+        _.forEach(body, function (project, index) {
+          delete project.auto_estimates;
+          delete project.created_at;
+          delete project.color;
+          delete project.at;
+          delete project.template;
+          delete project.actual_hours;
+          delete project.guid;
+          delete project.wid;
+        });
+
+        grunt.log.subhead('Listing projects in workspace ' + settings.workspace);
+        print.pt(body);
+      }
+
+      else {
+        grunt.log.oklns('New Toggl timer (maybe) started!');
+      }
+
+      // end async grunt task
+      done();
+    }
+
+////////////////////////////////////////////////////////////////////////////////
+// READ SETTINGS
+////////////////////////////////////////////////////////////////////////////////
+    // Try reading settingsFile
+    if (options.settingsFile) {
+      var fileSettings = grunt.file.readJSON(options.settingsFile);
+      settings = _.extend(settings, fileSettings);
+    }
+
+    // Use option values, overrides file values if any, otherwise default nulls
+    settings.apiKey    = options.apiKey    ? options.apiKey    : settings.apiKey;
+    settings.workspace = options.workspace ? options.workspace : settings.workspace;
+    settings.project   = options.project   ? options.project   : settings.project;
+
+    // Make sure we have a key
+    if (typeof settings.apiKey !== 'string' || !settings.apiKey.length) {
+      err = new Error('grunt-toggl needs an api key to work.');
+      grunt.fail.warn(err);
+    }
+
+////////////////////////////////////////////////////////////////////////////////
+// CREATE REQUEST PARAMS
+////////////////////////////////////////////////////////////////////////////////
+    // Set request params
+    params.auth = {
+      user: settings.apiKey,
+      pass: 'api_token',
+      sendImmediately: true
+    };
+    params.json = true;
+
+    // runMode specific request params
+    // list workspaces?
+    if (listMode === 'workspaces' || !settings.workspace || isNaN(settings.workspace)) {
+      runMode = 'listWorkspaces';
+      params.url = 'https://www.toggl.com/api/v8/workspaces';
+      params.method = 'GET';
+    }
+
+    // list projects (has workspace)
+    else if (listMode === 'projects') {
+      runMode = 'listProjects';
+      params.url = 'https://www.toggl.com/api/v8/workspaces/' + settings.workspace + '/projects';
+      params.method = 'GET';
+    }
+
+    // create time entry
+    else {
+      runMode = 'create';
+      params.url = 'https://www.toggl.com/api/v8/time_entries';
+      params.method = 'POST';
+
+      var date = new Date();
+      var start = date.toISOString();
+      var duration = -(date.getTime() / 1000); // must be in SECONDS
+      var defaults = {
+        wid:          settings.workspace,
+        start:        start,
+        duration:     duration,
+        created_with: 'grunt-toggl'
+      };
+      if (settings.project) {
+        defaults.pid = settings.project;
+      }
+      var timeEntryData = _.extend(defaults, options.data);
+      params.body = {
+        time_entry: timeEntryData
+      };
+    }
+
+////////////////////////////////////////////////////////////////////////////////
+// DO REQUEST
+////////////////////////////////////////////////////////////////////////////////
+    // Using Request HTTP module, make a request to Toggl API to start timer
+    request(params, function (error, response, body) {
       if (error) {
         grunt.fail.warn(error);
       }
@@ -68,69 +188,8 @@ module.exports = function(grunt) {
         grunt.fail.warn(err, response.statusCode);
       }
 
-      grunt.log.writeln('New Toggl timer (maybe) started!');
-      done();
-    }
-
-////////////////////////////////////////////////////////////////////////////////
-
-    // Try reading settingsFile
-    if (options.settingsFile) {
-      var settings = grunt.file.readJSON(options.settingsFile);
-      if (settings.apiKey) {
-        apiKey = settings.apiKey;
-      }
-      if (settings.workspace) {
-        workspace = settings.workspace;
-      }
-    }
-
-    // Use option values, override file values
-    if (options.apiKey) {
-      apiKey = options.apiKey;
-    }
-    if (options.workspace) {
-      workspace = options.workspace;
-    }
-
-    // Make sure we have a key
-    validateKey();
-
-    params.auth = {
-      user: apiKey,
-      pass: 'api_token',
-      sendImmediately: true
-    };
-    params.json = true;
-
-    // show workspaces
-    if (getWorkspaces || !workspace || isNaN(workspace)) {
-      params.url = 'https://www.toggl.com/api/v8/workspaces';
-      params.method = 'GET';
-    }
-
-    // create time entry
-    else {
-      params.url = 'https://www.toggl.com/api/v8/time_entries';
-      params.method = 'POST';
-
-      var date = new Date();
-      var start = date.toISOString();
-      var duration = -(date.getTime() / 1000); // must be in SECONDS
-      var defaults = {
-        wid:          workspace,
-        start:        start,
-        duration:     duration,
-        created_with: 'grunt-toggl'
-      };
-      var timeEntryData = _.extend(defaults, options.data);
-      params.body = {
-        time_entry: timeEntryData
-      };
-    }
-
-    // Using Request HTTP module, make a request to Toggl API to start timer
-    request(params, requestCallback);
+      requestCallback(runMode, body);
+    });
   });
 
 };

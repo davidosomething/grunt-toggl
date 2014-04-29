@@ -67,6 +67,16 @@ module.exports = function(grunt) {
         },
       },
 
+      localSettingsFileWithProject: {
+        options: {
+          settingsFile: ".toggl", // this is .gitignored
+          project: 3337246,
+          data: {
+            description: 'TEST ENTRY'
+          }
+        },
+      },
+
       ////////////////////////////////////////
       // Invalid
       noKey: {

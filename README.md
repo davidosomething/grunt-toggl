@@ -42,7 +42,8 @@ grunt.initConfig({
     options: {
       apiKey: '',
       settingsFile: 'toggl.json'
-      workspace: null,
+      workspace:    null,
+      project:      null,
       data: {
         description: '<%= pkg.name %>',
       }
@@ -75,6 +76,7 @@ JSON file that contains the key "apiKey" and value with your Toggl API key.
 {
   "apiKey":     "demokeydemokeydemokey",
   "workspace":  12345
+  "project":    1111111
 }
 ```
 
@@ -89,8 +91,15 @@ want your API key in it (e.g. add your `.toggl` file to your `.gitignore`).
 Type: `Integer`
 Default value: `null`
 
-Equivalent to `options.data.wid`. Specify the Toggl Workspace ID
-that newly created time entries should go into.
+OPTIONAL (if specified in settingsFile). Equivalent to `options.data.wid`.
+Specify the Toggl Workspace ID that newly created time entries should go into.
+
+#### options.project
+Type: `Integer`
+Default value: `null`
+
+OPTIONAL. Equivalent to `options.data.pid`. Specify the Toggl Project ID that
+newly created time entries should go into.
 
 #### options.data
 Type: `Object`
@@ -114,6 +123,8 @@ endpoint:
     * See [Finding your workspace IDs](#finding-your-workspace-ids) for
       how to get the ID using this grunt task.
 * pid: project ID (integer, not required)
+    * See [Finding your project IDs](#finding-your-project-ids) for
+      how to get the ID using this grunt task.
 * tid: task ID (integer, not required)
 * billable: (boolean, not required, default false, available for pro
   workspaces)
@@ -134,19 +145,32 @@ endpoint:
 See this doc for the latest properties available for the API:
 [https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md](https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md)
 
+Data in this object will override the `workspace` and `project` properties for
+`data.wid` and `data.pid`
+
 ### Usage Examples
 
 #### Finding your workspace IDs
 
 Use:
 ```
-grunt toggl:MYTASK:getWorkspaces
+grunt toggl:MYTASK:workspaces
 ```
 To get a JSON list of workspaces. `MYTASK` should be whatever task you have
 configured, since you still need a valid API Key to get the workspaces.
 
 *OR* just run the task without a workspace set. It will list your workspaces
 by default.
+
+#### Finding your project IDs
+
+Use:
+```
+grunt toggl:MYTASK:projects
+```
+To get a JSON list of projects in the configured workspace. Your task needs to
+have a Workspace ID properly setup in order to use this argument (valid
+`workspace` or `wid` set in the options).
 
 #### Default Options
 
@@ -168,9 +192,13 @@ code using [Grunt](http://gruntjs.com/).
 
 ## TODO
 
- * Project and Task ID task querying like I provided for workspaces.
+ * `debug` option that deletes time entries as soon as they're created.
 
 ## Release History
 
- * 2014-04-28   v0.1.1    Alpha READY. It works.
- * 2014-04-28   v0.1.0    Work in progress, not ready.
+```
+* 2014-04-29   v0.2.0    [ADDED]    argument for listing projects in a workspace
+                         [CHANGED]  arg for listing workspaces
+* 2014-04-28   v0.1.1    Alpha READY. It works.
+* 2014-04-28   v0.1.0    Work in progress, not ready.
+```
