@@ -1,14 +1,15 @@
-[![Upstream](http://img.shields.io/badge/upstream-GitHub-lightgrey.svg?style=flat)](https://github.com/davidosomething/grunt-toggl)
+# <img src="http://davidosomething.com/content/uploads/grunt-toggl-logo.png" alt="grunt-toggl Logo" valign="middle" style="width: 2em; margin: 0 0.2em 0.2em 0;"> grunt-toggl
+> Toggl API for Grunt. E.g. start time tracking with `grunt watch` or
+  `grunt toggl`
+
+[![Upstream](http://img.shields.io/badge/upstream-GitHub-lightgrey.svg)](https://github.com/davidosomething/grunt-toggl)
 [![Build Status: Linux](https://travis-ci.org/davidosomething/grunt-toggl.png?branch=master)](https://travis-ci.org/davidosomething/grunt-toggl)
 [![dependencies](https://david-dm.org/davidosomething/grunt-toggl.png)](https://david-dm.org/davidosomething/grunt-toggl)
 [![NPM version](https://badge.fury.io/js/grunt-toggl.svg)](http://badge.fury.io/js/grunt-toggl)
 <br>[![npm Badge](https://nodei.co/npm/grunt-toggl.png?compact=true)](http://npmjs.org/package/grunt-toggl)
 
-# grunt-toggl
 
-> Toggl API for Grunt. E.g. start time tracking with `grunt watch` or
-  `grunt toggl`
-
+## Demo
 ![Demo of starting a timer from the command line](http://i0.wp.com/davidosomething.com/content/uploads/grunt-toggl.gif)
 
 ## Getting Started
