@@ -145,7 +145,6 @@ module.exports = function(grunt) {
         options.data.description = optionalDescription;
       }
     }
-    console.log("!!!!!!!!!!!!!!", options.data.description);
 
     // Use option values, overrides file values if any, otherwise default nulls
     settings.apiKey    = options.apiKey    ? options.apiKey    : settings.apiKey;
