@@ -174,6 +174,23 @@ To get a JSON list of projects in the configured workspace. Your task needs to
 have a Workspace ID properly setup in order to use this argument (valid
 `workspace` or `wid` set in the options).
 
+#### Stop the current task
+
+Use:
+```
+grunt toggl:MYTASK:stopCurrent
+```
+To stop the current task timer. This will call the API to find out if there is a current timer running. If there is, another call is made to stop it.
+
+*OR* add this to your Gruntfile.js
+```
+grunt.registerTask('toggl:stop', ['toggl:default:stopCurrent']);
+```
+and you will be able to simply call
+```
+grunt toggl:stop
+```
+
 #### Default Options
 
 ```js
