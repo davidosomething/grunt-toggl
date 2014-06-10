@@ -131,13 +131,21 @@ module.exports = function(grunt) {
       settings = _.extend(settings, fileSettings);
     }
 
-    if (options.desc) {
-      if (settings.description) {
-        settings.description += " " + grunt.options('desc');
+    var optionalDescription = grunt.option('desc');
+    if(!settings.data) {
+      settings.data = {};
+    }
+    if(!settings.data.description) {
+      settings.data.description = "";
+    }
+    if (optionalDescription) {
+      if (settings.data.description) {
+        options.data.description = settings.data.description + " " + optionalDescription;
       } else {
-        settings.description = grunt.options('desc');
+        options.data.description = optionalDescription;
       }
     }
+    console.log("!!!!!!!!!!!!!!", options.data.description);
 
     // Use option values, overrides file values if any, otherwise default nulls
     settings.apiKey    = options.apiKey    ? options.apiKey    : settings.apiKey;
