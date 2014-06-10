@@ -13,16 +13,14 @@ var print   = require('node-print');
 var request = require('request');
 
 module.exports = function(grunt) {
+  var _this;
+  var done;
+  var currentTaskID;
+  var moreToDo;
 
-  grunt.registerMultiTask('toggl',
-    'Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`',
-    function (listMode) {
-
-    // Request is asynchronous
-    var done = this.async();
-
+  function makeRequest (listMode) {
     // Merge task-specific and/or target-specific options with these defaults.
-    var options = this.options({
+    var options = _this.options({
       settingsFile: '.toggl',
       data:         {}
     });
@@ -42,6 +40,7 @@ module.exports = function(grunt) {
 
     // temp error object storage
     var err = null;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // CALLBACKS
@@ -91,12 +90,34 @@ module.exports = function(grunt) {
         print.pt(body);
       }
 
+      else if (runMode === 'current' || (runMode === 'stopCurrent' && currentTaskID === undefined)) {
+        if(runMode === 'stopCurrent') moreToDo = true;
+        grunt.log.oklns('Grabbing current timer!');
+      }
+
+      else if (runMode === 'stopCurrent') {
+        grunt.log.oklns('Current Toggl timer (maybe) stopped!');
+      }
+
       else {
         grunt.log.oklns('New Toggl timer (maybe) started!');
       }
 
-      // end async grunt task
-      done();
+      if(moreToDo) {
+        moreToDo = false;
+        if(listMode == 'stopCurrent') {
+          if(!body.data) {
+            grunt.log.errorlns("No current timer running. Nothing to stop.");
+            done();
+          } else {
+            currentTaskID = body.data.id;
+            makeRequest(listMode);
+          }
+        }
+      } else {
+        // end async grunt task
+        done();
+      }
     }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -145,6 +166,20 @@ module.exports = function(grunt) {
       params.method = 'GET';
     }
 
+    // get current time entry
+    else if (listMode === 'current' || (listMode === 'stopCurrent' && currentTaskID === undefined)) {
+      runMode = listMode;
+      params.url = 'https://www.toggl.com/api/v8/time_entries/current';
+      params.method = 'GET';
+    }
+
+    // stop current time entry
+    else if (listMode === 'stopCurrent') {
+      runMode = 'stopCurrent';
+      params.url = 'https://www.toggl.com/api/v8/time_entries/' + currentTaskID + '/stop';
+      params.method = 'PUT';
+    }
+
     // create time entry
     else {
       runMode = 'create';
@@ -190,6 +225,14 @@ module.exports = function(grunt) {
 
       requestCallback(runMode, body);
     });
-  });
+  };
 
+  grunt.registerMultiTask('toggl',
+    'Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`',
+    function (listMode) {
+      // Request is asynchronous
+      done = this.async();
+      _this = this;
+      makeRequest(listMode);
+    });
 };
