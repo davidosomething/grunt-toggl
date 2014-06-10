@@ -91,7 +91,9 @@ module.exports = function(grunt) {
       }
 
       else if (runMode === 'current' || (runMode === 'stopCurrent' && currentTaskID === undefined)) {
-        if(runMode === 'stopCurrent') moreToDo = true;
+        if(runMode === 'stopCurrent') {
+          moreToDo = true;
+        }
         grunt.log.oklns('Grabbing current timer!');
       }
 
@@ -105,7 +107,7 @@ module.exports = function(grunt) {
 
       if(moreToDo) {
         moreToDo = false;
-        if(listMode == 'stopCurrent') {
+        if(listMode === 'stopCurrent') {
           if(!body.data) {
             grunt.log.errorlns("No current timer running. Nothing to stop.");
             done();
@@ -127,6 +129,14 @@ module.exports = function(grunt) {
     if (options.settingsFile) {
       var fileSettings = grunt.file.readJSON(options.settingsFile);
       settings = _.extend(settings, fileSettings);
+    }
+
+    if (options.desc) {
+      if (settings.description) {
+        settings.description += " " + options.desc;
+      } else {
+        settings.description = options.desc;
+      }
     }
 
     // Use option values, overrides file values if any, otherwise default nulls
@@ -225,7 +235,7 @@ module.exports = function(grunt) {
 
       requestCallback(runMode, body);
     });
-  };
+  }
 
   grunt.registerMultiTask('toggl',
     'Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`',
