@@ -133,9 +133,9 @@ module.exports = function(grunt) {
 
     if (options.desc) {
       if (settings.description) {
-        settings.description += " " + options.desc;
+        settings.description += " " + grunt.options('desc');
       } else {
-        settings.description = options.desc;
+        settings.description = grunt.options('desc');
       }
     }
 
