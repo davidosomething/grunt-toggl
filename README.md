@@ -65,7 +65,14 @@ Toggl.com [https://www.toggl.com/app/#profile](https://www.toggl.com/app/#profil
 Type: `String`
 Default value: ``
 
-This is one way to specify your Toggl API key.
+This is one way to specify your Toggl API key. Not secure if your repo is public.
+
+#### options.apiEnvVar
+Type: `String`
+Default value: ``
+
+This is one way to specify your Toggl API key. Safe but you'll have to configure
+the shell env var on the machine you're using the task on.
 
 #### options.settingsFile
 Type: `String`

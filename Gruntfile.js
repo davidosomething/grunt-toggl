@@ -54,22 +54,15 @@ module.exports = function(grunt) {
 */
       validSettingsFile: {
         options: {
-          settingsFile: 'test/fixtures/valid'
-        },
-      },
-
-      localSettingsFile: {
-        options: {
-          settingsFile: ".toggl", // this is .gitignored
-          data: {
-            description: 'TEST ENTRY'
-          }
+          settingsFile: 'test/fixtures/valid',
+          apiEnvVar: 'TOGGL_API_KEY'
         },
       },
 
       localSettingsFileWithProject: {
         options: {
-          settingsFile: ".toggl", // this is .gitignored
+          settingsFile: 'test/fixtures/valid',
+          apiEnvVar: 'TOGGL_API_KEY',
           project: 3337246,
           data: {
             description: 'TEST ENTRY'
@@ -90,7 +83,8 @@ module.exports = function(grunt) {
 
       missingSettingsFile: {
         options: {
-          settingsFile: 'missing'
+          settingsFile: 'missing',
+          apiEnvVar: 'TOGGL_API_KEY'
         },
       },
 
@@ -106,13 +100,6 @@ module.exports = function(grunt) {
         },
       }
     },
-
-////////////////////////////////////////////////////////////////////////////////
-    // Unit tests.
-    nodeunit: {
-      tests: ['test/*_test.js'],
-    },
-
   });
 
 ////////////////////////////////////////////////////////////////////////////////

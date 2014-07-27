@@ -131,6 +131,10 @@ module.exports = function(grunt) {
       settings = _.extend(settings, fileSettings);
     }
 
+    if (options.apiEnvVar) {
+      settings.apiKey = process.env[options.apiEnvVar];
+    }
+
     var optionalDescription = grunt.option('desc');
     if(!settings.data) {
       settings.data = {};
