@@ -1,7 +1,7 @@
 {
   "name": "grunt-toggl",
   "description": "Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/davidosomething/grunt-toggl",
   "author": {
     "name": "David O'Trakoun",
