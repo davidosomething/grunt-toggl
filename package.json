@@ -28,9 +28,9 @@
     "test": "grunt test --force"
   },
   "dependencies": {
-    "lodash": "~2.4.1",
+    "lodash": "^3.10.1",
     "node-print": "~0.0.4",
-    "request": "~2.34.0"
+    "request": "^2.63.0"
   },
   "devDependencies": {
     "grunt": "~0.4.4",
