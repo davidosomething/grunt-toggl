@@ -1,4 +1,4 @@
-# <img src="http://davidosomething.com/content/uploads/grunt-toggl-logo.png" alt="grunt-toggl Logo" valign="middle" style="width: 2em; margin: 0 0.2em 0.2em 0;"> grunt-toggl
+# <img src="https://davidosomething.com/assets/img/posts/grunt-toggl-logo.png" alt="grunt-toggl Logo" valign="middle" style="width: 2em; margin: 0 0.2em 0.2em 0;"> grunt-toggl
 
 > Toggl API for Grunt. E.g. start time tracking with `grunt watch` or
 > `grunt toggl`
@@ -12,7 +12,7 @@
 
 ## Demo
 
-![Demo of starting a timer from the command line](http://i0.wp.com/davidosomething.com/content/uploads/grunt-toggl.gif)
+![Demo of starting a timer from the command line](https://davidosomething.com/assets/img/posts/grunt-toggl.gif)
 
 ## Getting Started
 
