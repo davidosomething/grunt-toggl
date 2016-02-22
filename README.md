@@ -245,6 +245,7 @@ code using [Grunt](http://gruntjs.com/).
 ## Release History
 
 ```markdown
+- 2015-02-22   v1.0.0    [CHANGED]  dependency bump
 - 2015-02-21   v0.3.0    [CHANGED]  support grunt >=0.4.4 in package.json
 - 2014-04-29   v0.2.0    [ADDED]    argument for listing projects in a workspace
 - 2014-04-29   v0.2.0    [ADDED]    argument for listing projects in a workspace

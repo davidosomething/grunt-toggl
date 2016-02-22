@@ -2,7 +2,7 @@
   "name": "grunt-toggl",
   "description": "Toggl API for Grunt. E.g. start time tracking with `grunt watch` or `grunt toggl`",
   "homepage": "https://github.com/davidosomething/grunt-toggl",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "author": {
     "name": "David O'Trakoun",
     "email": "me@davidosomething.com",
@@ -28,15 +28,15 @@
     "test": "grunt test --force"
   },
   "dependencies": {
-    "lodash": "^3.10.1",
+    "lodash": "^4.5.0",
     "node-print": "~0.0.4",
-    "request": "^2.63.0"
+    "request": "^2.69.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-bump": "^0.5.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.11.3",
+    "grunt": "~0.4.5",
+    "grunt-bump": "^0.7.0",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-nodeunit": "^0.4.1"
   },
   "peerDependencies": {
